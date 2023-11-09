@@ -25,7 +25,6 @@ class c_fasilitas extends Controller
     public function get()
     {
         $fasilitas = $this->fasilitas->allData();
-        // return $fasilitas;
         $data = ['fasilitas' => $this->id($fasilitas)];
         return $this->encrypt->encode($data);
     }
