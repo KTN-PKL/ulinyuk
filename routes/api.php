@@ -7,6 +7,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\c_kategori;
 use App\Http\Controllers\c_fasilitas;
 use App\Http\Controllers\c_berita_informasi;
+use App\Http\Controllers\c_mitra;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +40,7 @@ Route::controller(c_kategori::class)->middleware('auth:sanctum')->group(function
     Route::post('admin/kategori', 'store')->middleware('role:admin');
     Route::get('admin/kategori/{id}', 'show')->middleware('role:admin');
     Route::get('admin/kategori', 'get')->middleware('role:admin');
-     Route::get('kategori/{id}', 'show');
+    Route::get('kategori/{id}', 'show');
     Route::get('kategori', 'get');
 	Route::post('admin/kategori/{id}', 'put')->middleware('role:admin');
     Route::delete('admin/kategori/{id}', 'delete')->middleware('role:admin');
@@ -53,6 +54,14 @@ Route::controller(c_fasilitas::class)->middleware('auth:sanctum')->group(functio
     Route::get('fasilitas', 'get');
 	Route::post('admin/fasilitas/{id}', 'put')->middleware('role:admin');
     Route::delete('admin/fasilitas/{id}', 'delete')->middleware('role:admin');
+});
+
+Route::controller(c_mitra::class)->middleware('auth:sanctum')->group(function () {
+    Route::post('admin/mitra', 'store')->middleware('role:admin');
+    Route::get('admin/mitra/{id}', 'show')->middleware('role:admin');
+    Route::get('admin/mitra', 'get')->middleware('role:admin');
+	Route::post('admin/mitra/{id}', 'put')->middleware('role:admin');
+    Route::delete('admin/mitra/{id}', 'delete')->middleware('role:admin');
 });
 
 Route::controller(c_berita_informasi::class)->middleware('auth:sanctum')->group(function () {

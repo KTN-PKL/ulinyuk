@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('mitras', function (Blueprint $table) {
             $table->id('id_mitra');
-            $table->string('kontak');
+            $table->string('id_user');
             $table->string('pj');
-            $table->bigInteger('rekening');
+            $table->string('nama_rekening');
+            $table->string('bank');
+            $table->string('jenis');
+            $table->string('rekening');
             $table->text('deskripsi_mitra');
             $table->timestamps();
         });
