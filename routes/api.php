@@ -62,6 +62,9 @@ Route::controller(c_mitra::class)->middleware('auth:sanctum')->group(function ()
     Route::get('admin/mitra', 'get')->middleware('role:admin');
 	Route::post('admin/mitra/{id}', 'put')->middleware('role:admin');
     Route::delete('admin/mitra/{id}', 'delete')->middleware('role:admin');
+    Route::put('admin/active/mitra/{id}', 'active')->middleware('role:admin');
+    Route::put('admin/inactive/mitra/{id}', 'inactive')->middleware('role:admin');
+    Route::delete('admin/mitra/{id}', 'delete')->middleware('role:admin');
 });
 
 Route::controller(c_berita_informasi::class)->middleware('auth:sanctum')->group(function () {

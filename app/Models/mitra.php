@@ -16,7 +16,7 @@ class mitra extends Model
     }
     public function detailData($id)
     {
-        return DB::table('mitras')->where('id_mitra', $id)->first();
+        return DB::table('mitras')->join('users', 'users.id', '=', 'mitras.id_user')->where('id_mitra', $id)->first();
     }
     public function addData($data)
     {
