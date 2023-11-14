@@ -13,6 +13,10 @@ class c_fasilitas_wisata extends Controller
         $this->fasilitas_wisata = new fasilitas_wisata();
         $this->encrypt = $encrypt;
     }
+    public function allData($id)
+    {
+        return $this->fasilitas_wisata->allData($id);
+    }
     public function addData($id, $fasilitas)
     {
         foreach ($fasilitas as $item) {

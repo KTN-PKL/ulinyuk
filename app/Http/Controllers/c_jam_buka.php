@@ -39,6 +39,10 @@ class c_jam_buka extends Controller
                 break;
         }
     }
+    public function allData($id)
+    {
+        $this->jam_buka->allData($id);
+    }
     public function addData($id, $buka, $tutup)
     {   
         $i = 0;

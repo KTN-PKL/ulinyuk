@@ -10,9 +10,9 @@ class foto_wisata extends Model
 {
     use HasFactory;
 
-    public function allData()
+    public function allData($id)
     {
-        return DB::table('foto_wisatas')->get();
+        return DB::table('foto_wisatas')->where('id_wisata', $id)->get();
     }
     public function count($id)
     {
@@ -34,4 +34,5 @@ class foto_wisata extends Model
     {
         DB::table('foto_wisatas')->where('id_foto_wisata', $id)->delete();
     }
+
 }

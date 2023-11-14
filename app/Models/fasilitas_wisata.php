@@ -12,7 +12,7 @@ class fasilitas_wisata extends Model
     
     public function allData($id)
     {
-        return DB::table('fasilitas_wisatas')->where('id_wisata', $id)->get();
+        return DB::table('fasilitas_wisatas')->join('fasilitas', 'fasilitas_wisatas.id_fasilitas', '=', 'fasilitas.id_fasilitas')->where('id_wisata', $id)->get();
     }
     public function addData($data)
     {
