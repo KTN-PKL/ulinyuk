@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('id_mitra');
             $table->string('alamat');
             $table->string('lokasi');
-            $table->string('deskripsi_wisata');
+            $table->text('deskripsi_wisata');
             $table->string('status_wisata')->default('incomplete');
             $table->timestamps();
         });

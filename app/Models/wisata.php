@@ -14,6 +14,10 @@ class wisata extends Model
     {
         return DB::table('wisatas')->get();
     }
+    public function id($id)
+    {
+        return DB::table('wisatas')->where('id_mitra', $id)->orderBy('id_wisata', 'desc')->first();
+    }
     public function detailData($id)
     {
         return DB::table('wisatas')->where('id_wisata', $id)->first();

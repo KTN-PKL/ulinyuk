@@ -8,6 +8,7 @@ use App\Http\Controllers\c_kategori;
 use App\Http\Controllers\c_fasilitas;
 use App\Http\Controllers\c_berita_informasi;
 use App\Http\Controllers\c_mitra;
+use App\Http\Controllers\c_wisata;
 
 /*
 |--------------------------------------------------------------------------
@@ -77,6 +78,17 @@ Route::controller(c_berita_informasi::class)->middleware('auth:sanctum')->group(
     Route::put('admin/aktif/berita_informasi/{id}', 'aktif')->middleware('role:admin');
     Route::put('admin/nonaktif/berita_informasi/{id}', 'nonaktif')->middleware('role:admin');
     Route::delete('admin/berita_informasi/{id}', 'delete')->middleware('role:admin');
+});
+Route::controller(c_wisata::class)->middleware('auth:sanctum')->group(function () {
+    Route::post('admin/wisata', 'store')->middleware('role:admin');
+    Route::get('wisata/{id}', 'show');
+    Route::get('wisata', 'get');
+    Route::get('admin/wisata/{id}', 'show')->middleware('role:admin');
+    Route::get('admin/wisata', 'get')->middleware('role:admin');
+	Route::post('admin/wisata/{id}', 'put')->middleware('role:admin');
+    Route::put('admin/aktif/wisata/{id}', 'aktif')->middleware('role:admin');
+    Route::put('admin/nonaktif/wisata/{id}', 'nonaktif')->middleware('role:admin');
+    Route::delete('admin/wisata/{id}', 'delete')->middleware('role:admin');
 });
 
 
