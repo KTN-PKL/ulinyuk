@@ -10,13 +10,9 @@ class jam_buka extends Model
 {
     use HasFactory;
 
-    public function allData()
+    public function allData($id)
     {
-        return DB::table('jam_bukas')->get();
-    }
-    public function detailData($id)
-    {
-        return DB::table('jam_bukas')->where('id_jam_buka', $id)->first();
+        return DB::table('jam_bukas')->where('id_wisata', $id)->get();
     }
     public function addData($data)
     {
@@ -28,6 +24,6 @@ class jam_buka extends Model
     }
     public function deleteData($id)
     {
-        DB::table('jam_bukas')->where('id_jam_buka', $id)->delete();
+        DB::table('jam_bukas')->where('id_wisata', $id)->delete();
     }
 }

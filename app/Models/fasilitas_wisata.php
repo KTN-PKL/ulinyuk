@@ -10,13 +10,9 @@ class fasilitas_wisata extends Model
 {
     use HasFactory;
     
-    public function allData()
+    public function allData($id)
     {
-        return DB::table('fasilitas_wisatas')->get();
-    }
-    public function detailData($id)
-    {
-        return DB::table('fasilitas_wisatas')->where('id_fasilitas_wisata', $id)->first();
+        return DB::table('fasilitas_wisatas')->where('id_wisata', $id)->get();
     }
     public function addData($data)
     {
@@ -28,6 +24,6 @@ class fasilitas_wisata extends Model
     }
     public function deleteData($id)
     {
-        DB::table('fasilitas_wisatas')->where('id_fasilitas_wisata', $id)->delete();
+        DB::table('fasilitas_wisatas')->where('id_wisata', $id)->delete();
     }
 }

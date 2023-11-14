@@ -21,4 +21,9 @@ class c_fasilitas_wisata extends Controller
             $this->fasilitas_wisata->addData($data);
         }
     }
+    public function editData($id, $fasilitas)
+    {
+        $this->fasilitas_wisata->deleteData($id);
+        $this->addData($id, $fasilitas);
+    }
 }

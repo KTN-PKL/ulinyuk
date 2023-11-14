@@ -61,9 +61,18 @@ class c_wisata extends Controller
     public function put(Request $request, $id)
     {
         $did = decrypt($id);
-        $data = ['wisata' => $request->wisata];
+        $data = ['wisata' => $request->wisata,
+                 'id_kategori' => decrypt($request->id_kategori),
+                 'alamat'=> $request->alamat,
+                 'lokasi'=> $request->lokasi,
+                 'deskripsi_wisata'=>$request->deskripsi_wisata];
         $this->wisata->editData($did, $data);
-        return response(['message' => 'wisata Berhasil Diubah'], 201);
+        if ($request->foto <> null) {
+            $this->foto_wisata->addData($id->id_wisata, $request->foto);
+        }
+        $this->fasilitas_wisata->editData($did, $request->fasilitas);
+        $this->jam_buka->editData($did, $request->buka, $request->tutup);
+        return response(['message' => 'Wisata Berhasil Diubah'], 201);
     }
     public function delete($id)
     {

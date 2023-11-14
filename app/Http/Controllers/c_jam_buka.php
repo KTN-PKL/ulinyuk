@@ -52,4 +52,9 @@ class c_jam_buka extends Controller
         }
         
     }
+    public function editData($id, $buka, $tutup)
+    {
+        $this->jam_buka->deleteData($id);
+        $this->addData($id, $buka, $tutup);
+    }
 }
