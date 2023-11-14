@@ -41,7 +41,7 @@ class c_jam_buka extends Controller
     }
     public function allData($id)
     {
-        $this->jam_buka->allData($id);
+        return $this->jam_buka->allData($id);
     }
     public function addData($id, $buka, $tutup)
     {   

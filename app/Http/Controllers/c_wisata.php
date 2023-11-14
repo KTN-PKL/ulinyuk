@@ -59,7 +59,7 @@ class c_wisata extends Controller
         $fasilitas_wisata= $this->fasilitas_wisata->allData($did);
         $foto_wisata = $this->foto_wisata->allData($did);
         $data = ['wisata' => $wisata,
-                 'jam_buka' => $this->id($jam_buka),
+                 'jam_buka' => $jam_buka,
                  'fasilitas' => $this->id($fasilitas_wisata),
                  'foto'=> $this->id($foto_wisata)];
         return $this->encrypt->encode($data);

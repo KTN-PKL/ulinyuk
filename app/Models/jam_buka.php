@@ -12,7 +12,7 @@ class jam_buka extends Model
 
     public function allData($id)
     {
-        return DB::table('jam_bukas')->where('id_wisata', $id)->get();
+        return DB::table('jam_bukas')->select('id_jam_buka', 'hari', 'buka', 'tutup')->where('id_wisata', $id)->get();
     }
     public function addData($data)
     {
