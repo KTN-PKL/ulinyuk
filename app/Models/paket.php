@@ -6,28 +6,28 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use DB;
 
-class jam_buka extends Model
+class paket extends Model
 {
     use HasFactory;
 
     public function allData()
     {
-        return DB::table('jam_bukas')->get();
+        return DB::table('pakets')->get();
     }
     public function detailData($id)
     {
-        return DB::table('jam_bukas')->where('id_jam_buka', $id)->first();
+        return DB::table('pakets')->where('id_paket', $id)->first();
     }
     public function addData($data)
     {
-        DB::table('jam_bukas')->insert($data);
+        DB::table('pakets')->insert($data);
     }
     public function editData($id, $data)
     {
-        DB::table('jam_bukas')->where('id_jam_buka', $id)->update($data);
+        DB::table('pakets')->where('id_paket', $id)->update($data);
     }
     public function deleteData($id)
     {
-        DB::table('jam_bukas')->where('id_jam_buka', $id)->delete();
+        DB::table('pakets')->where('id_paket', $id)->delete();
     }
 }

@@ -7,15 +7,17 @@ use App\Models\wisata;
 use App\Http\Controllers\c_encrypt;
 use App\Http\Controllers\c_fasilitas_wisata;
 use App\Http\Controllers\c_foto_wisata;
+use App\Http\Controllers\c_jam_buka;
 
 class c_wisata extends Controller
 {
-    public function __construct(c_encrypt $encrypt, c_fasilitas_wisata $fasilitas_wisata, c_foto_wisata $foto_wisata)
+    public function __construct(c_encrypt $encrypt, c_fasilitas_wisata $fasilitas_wisata, c_foto_wisata $foto_wisata, c_jam_buka $jam_buka)
     {
         $this->wisata = new wisata();
         $this->encrypt = $encrypt;
         $this->fasilitas_wisata = $fasilitas_wisata;
         $this->foto_wisata = $foto_wisata;
+        $this->jam_buka = $jam_buka;
     }
 
     public function id($data){
@@ -45,6 +47,7 @@ class c_wisata extends Controller
         $eid = encrypt($id->id_wisata);
         $this->foto_wisata->addData($id->id_wisata, $request->foto);
         $this->fasilitas_wisata->addData($id->id_wisata, $request->fasilitas);
+        $this->jam_buka->addData($id->id_wisata, $request->buka, $request->tutup);
         return response(['message' => 'wisata Berhasil Dibuat', 'id'=>$eid], 201);
     }
     public function show($id)
