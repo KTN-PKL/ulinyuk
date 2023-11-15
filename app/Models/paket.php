@@ -10,9 +10,9 @@ class paket extends Model
 {
     use HasFactory;
 
-    public function allData()
+    public function allData($id)
     {
-        return DB::table('pakets')->get();
+        return DB::table('pakets')->select('id_paket', 'paket', 'fitur', 'harga_wday', 'harga_wend')->where('id_wisata', $id)->get();
     }
     public function id($id)
     {
@@ -20,7 +20,7 @@ class paket extends Model
     }
     public function detailData($id)
     {
-        return DB::table('pakets')->where('id_paket', $id)->first();
+        return DB::table('pakets')->select('id_paket', 'paket', 'fitur', 'harga_wday', 'harga_wend')->where('id_paket', $id)->first();
     }
     public function addData($data)
     {

@@ -25,4 +25,14 @@ class c_paket_opsi extends Controller
             $i = $i + 1;
         }
     }
+    public function allData($id)
+    {
+        return $this->paket_opsi->allData($id);
+    }
+    public function editData($mulai_dari, $hingga_sampai, $harga_opsi, $id)
+    {
+        $this->paket_opsi->deleteData($id);
+        $this->addData($mulai_dari, $hingga_sampai, $harga_opsi, $id);
+    }
+           
 }

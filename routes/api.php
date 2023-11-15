@@ -95,8 +95,8 @@ Route::controller(c_paket::class)->middleware('auth:sanctum')->group(function ()
     Route::post('admin/paket', 'store')->middleware('role:admin');
     Route::get('paket/{id}', 'show');
     Route::get('paket', 'get');
-    Route::get('admin/paket/{id}', 'show')->middleware('role:admin');
-    Route::get('admin/paket', 'get')->middleware('role:admin');
+    Route::get('admin/detail/paket/{id}', 'show')->middleware('role:admin');
+    Route::get('admin/all/paket/{id}', 'get')->middleware('role:admin');
 	Route::post('admin/paket/{id}', 'put')->middleware('role:admin');
     Route::put('admin/aktif/paket/{id}', 'aktif')->middleware('role:admin');
     Route::put('admin/nonaktif/paket/{id}', 'nonaktif')->middleware('role:admin');
