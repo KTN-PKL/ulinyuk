@@ -14,6 +14,10 @@ class paket extends Model
     {
         return DB::table('pakets')->get();
     }
+    public function id($id)
+    {
+        return DB::table('pakets')->where('id_wisata', $id)->orderBy('id_paket', 'desc')->first();
+    }
     public function detailData($id)
     {
         return DB::table('pakets')->where('id_paket', $id)->first();
