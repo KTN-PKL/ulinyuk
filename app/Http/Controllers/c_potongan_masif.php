@@ -23,6 +23,11 @@ class c_potongan_masif extends Controller
             $i = $i + 1;
         }
     }
+    public function cekpotongan($id_paket, $jumlah)
+    {
+        $did = decrypt($id_paket);
+        return $this->potongan_masif->cekPotongan($did, $jumlah);
+    }
     public function allData($id)
     {
         return $this->potongan_masif->allData($id);

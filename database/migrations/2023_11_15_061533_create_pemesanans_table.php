@@ -17,6 +17,7 @@ return new class extends Migration
             $table->bigInteger('id_paket');
             $table->string('jumlah');
             $table->string('tanggal');
+            $table->string('deskripsi');
             $table->string('harga_total');
             $table->string('checkout_link');
             $table->string('external_id');

@@ -18,6 +18,10 @@ class potongan_masif extends Model
     {
         return DB::table('potongan_masifs')->where('id_potongan_masif', $id)->first();
     }
+    public function cekPotongan($id, $jumlah)
+    {
+        return DB::table('potongan_masifs')->select('potongan', 'jumlah_dari', 'jumlah_sampai')->where('id_paket', $id)->where('jumlah_dari', '<=', $jumlah)->where('jumlah_sampai', '>=', $jumlah)->first();
+    }
     public function addData($data)
     {
         DB::table('potongan_masifs')->insert($data);

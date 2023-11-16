@@ -10,6 +10,7 @@ use App\Http\Controllers\c_berita_informasi;
 use App\Http\Controllers\c_mitra;
 use App\Http\Controllers\c_wisata;
 use App\Http\Controllers\c_paket;
+use App\Http\Controllers\c_pemesanan;
 
 /*
 |--------------------------------------------------------------------------
@@ -101,6 +102,9 @@ Route::controller(c_paket::class)->middleware('auth:sanctum')->group(function ()
     Route::put('admin/aktif/paket/{id}', 'aktif')->middleware('role:admin');
     Route::put('admin/nonaktif/paket/{id}', 'nonaktif')->middleware('role:admin');
     Route::delete('admin/paket/{id}', 'delete')->middleware('role:admin');
+});
+Route::controller(c_pemesanan::class)->middleware('auth:sanctum')->group(function () {
+    Route::post('pemesanan', 'create');
 });
 
 

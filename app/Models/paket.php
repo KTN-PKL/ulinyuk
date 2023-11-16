@@ -14,6 +14,10 @@ class paket extends Model
     {
         return DB::table('pakets')->select('id_paket', 'paket', 'fitur', 'harga_wday', 'harga_wend')->where('id_wisata', $id)->get();
     }
+    public function detailHarga($id)
+    {
+        return DB::table('pakets')->select('wisata', 'paket', 'harga_wday', 'harga_wend')->join('wisatas', 'pakets.id_wisata', '=', 'wisatas.id_wisata')->where('id_paket', $id)->first();
+    }
     public function id($id)
     {
         return DB::table('pakets')->where('id_wisata', $id)->orderBy('id_paket', 'desc')->first();

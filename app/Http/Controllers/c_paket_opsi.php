@@ -25,6 +25,11 @@ class c_paket_opsi extends Controller
             $i = $i + 1;
         }
     }
+    public function cekharga($id_paket, $tanggal)
+    {
+        $did = decrypt($id_paket);
+        return $this->paket_opsi->cekHarga($did, $tanggal);
+    }
     public function allData($id)
     {
         return $this->paket_opsi->allData($id);

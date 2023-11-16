@@ -70,6 +70,11 @@ class c_paket extends Controller
                  'potongan_masif'=> $this->potongan_masif->allData($did)];
         return $this->encrypt->encode($data);
     }
+    public function detailData($id)
+    {
+        $did = decrypt($id);
+        return $paket = $this->paket->detailHarga($did);
+    }
     public function put(Request $request, $id)
     {
         $did = decrypt($id);

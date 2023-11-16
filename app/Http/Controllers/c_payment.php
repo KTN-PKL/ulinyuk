@@ -27,6 +27,22 @@ class c_payment extends Controller
             'payer_email' => $request->payer_email,
             'description' => $request->description,
             'amount' => $request->amount,
+            'invoice_options' => [
+                'admin_fee' => [
+                    'amount' => 5000,
+                    'currency' => 'IDR', // Ganti dengan mata uang yang sesuai
+                ],
+                'tax' => [
+                    'amount' => 5000,
+                    'currency' => 'IDR', // Ganti dengan mata uang yang sesuai
+                ],
+                'discounts' => [
+                    [
+                        'amount' => 5000,
+                        'description' => 'Discount', // Deskripsi diskon
+                    ],
+                ],
+            ],
         ];
 
         $invoice = $this->invoice->createInvoice($params);
