@@ -6,28 +6,28 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use DB;
 
-class pemesanan extends Model
+class tiket_wisata extends Model
 {
     use HasFactory;
 
     public function allData()
     {
-        return DB::table('pemesanans')->get();
+        return DB::table('tiket_wisatas')->get();
     }
     public function detailData($id)
     {
-        return DB::table('pemesanans')->where('external_id', $id)->first();
+        return DB::table('tiket_wisatas')->where('id_tiket_wisata', $id)->first();
     }
     public function addData($data)
     {
-        DB::table('pemesanans')->insert($data);
+        DB::table('tiket_wisatas')->insert($data);
     }
     public function editData($id, $data)
     {
-        DB::table('pemesanans')->where('external_id', $id)->update($data);
+        DB::table('tiket_wisatas')->where('id_tiket_wisata', $id)->update($data);
     }
     public function deleteData($id)
     {
-        DB::table('pemesanans')->where('id_pemesanan', $id)->delete();
+        DB::table('tiket_wisatas')->where('id_tiket_wisata', $id)->delete();
     }
 }
