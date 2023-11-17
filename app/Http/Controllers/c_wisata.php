@@ -8,6 +8,7 @@ use App\Http\Controllers\c_encrypt;
 use App\Http\Controllers\c_fasilitas_wisata;
 use App\Http\Controllers\c_foto_wisata;
 use App\Http\Controllers\c_jam_buka;
+use Auth;
 
 class c_wisata extends Controller
 {
@@ -27,15 +28,24 @@ class c_wisata extends Controller
         return $data;
     }
    
-    public function get()
+    public function get($id)
     {
-        $wisata = $this->wisata->allData();
+        if ($request->id_pengguna <> null) {
+            $did = decrypt($id);
+        } else {
+            $did = Auth::user()->id; 
+        }
+        $wisata = $this->wisata->mitraData($id);
         $data = ['wisata' => $this->id($wisata)];
         return $this->encrypt->encode($data);
     }
     public function store(Request $request)
     {
-        $did = decrypt($request->id_pengguna);
+        if ($request->id_pengguna <> null) {
+            $did = decrypt($request->id_pengguna);
+        } else {
+            $did = Auth::user()->id; 
+        }
         $data = ['wisata' => $request->wisata,
                  'id_mitra' => $did,
                  'id_kategori' => decrypt($request->id_kategori),
@@ -85,5 +95,14 @@ class c_wisata extends Controller
         $did = decrypt($id);
         $this->wisata->deleteData($did);
         return response(['message' => 'wisata Berhasil Dihapus'], 201);
+    }
+    public function allDataU()
+    {
+        $wisata = $this->wisata->allData();
+        foreach ($wisata as $item) {
+            $item->foto = $this->foto_wisata->detailData($item->id_wisata);
+        }
+        $data=['wisata' => $this->id($wisata)];
+        return $data;
     }
 }

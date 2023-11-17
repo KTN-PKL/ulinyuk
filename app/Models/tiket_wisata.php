@@ -10,6 +10,11 @@ class tiket_wisata extends Model
 {
     use HasFactory;
 
+    public function count($id_user, $id_paket)
+    {
+        return DB::table('tiket_wisatas')->where('id_paket', $id_paket)->where('id_user', $id_user)->count();
+    }
+
     public function allData()
     {
         return DB::table('tiket_wisatas')->get();

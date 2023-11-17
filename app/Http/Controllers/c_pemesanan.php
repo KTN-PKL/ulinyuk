@@ -115,7 +115,9 @@ class c_pemesanan extends Controller
         $data = ['status'=>$status];
         $this->pemesanan->editData($id, $data);
         $pemesanan = $this->pemesanan->detailData($id);
-        $tiket = 'ETW-'.$pemesanan->tanggal.'-'.$pemesanan->id_user.'-'.$pemesanan->id_paket.'-'.$d.'-'.$h;
+        $j = count($pemesanan->id_user, $pemesanan->id_paket);
+        $j = $j + 1;
+        $tiket = 'ETW-'.$pemesanan->id_user.'-'.$pemesanan->id_paket.'-'.$j;
         $qr = $this->createQrCode($tiket);
         $data = [
             'id_user'=> $pemesanan->id_user,
