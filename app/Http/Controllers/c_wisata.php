@@ -32,7 +32,7 @@ class c_wisata extends Controller
    
     public function get($id)
     {
-        if ($request->id_pengguna <> null) {
+        if ($id <> null) {
             $did = decrypt($id);
         } else {
             $did = Auth::user()->id; 

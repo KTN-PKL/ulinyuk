@@ -84,7 +84,7 @@ Route::controller(c_berita_informasi::class)->middleware('auth:sanctum')->group(
 Route::controller(c_wisata::class)->middleware('auth:sanctum')->group(function () {
     Route::post('admin/wisata', 'store')->middleware('role:admin');
     Route::get('admin/wisata/{id}', 'show')->middleware('role:admin');
-    Route::get('admin/wisata', 'get')->middleware('role:admin');
+    Route::get('admin/allData/wisata/{id}', 'get')->middleware('role:admin');
 	Route::post('admin/wisata/{id}', 'put')->middleware('role:admin');
     Route::put('admin/aktif/wisata/{id}', 'aktif')->middleware('role:admin');
     Route::put('admin/nonaktif/wisata/{id}', 'nonaktif')->middleware('role:admin');
