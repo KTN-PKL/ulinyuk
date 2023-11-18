@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('kode_tiket')->unique();
             $table->string('status_tiket_wisata');
             $table->string('qr');
+            $table->string('jenis_tiket');
             $table->timestamps();
         });
     }

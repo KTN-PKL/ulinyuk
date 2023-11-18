@@ -119,13 +119,19 @@ class c_pemesanan extends Controller
         $j = $j + 1;
         $tiket = 'ETW-'.$pemesanan->id_user.'-'.$pemesanan->id_paket.'-'.$j;
         $qr = $this->createQrCode($tiket);
+        if ($pemesanan->jumlah > 20) {
+            $jenis = 'Tiket Wisata Masif';
+        } else {
+            $jenis = 'Tiket Wisata';
+        }
         $data = [
             'id_user'=> $pemesanan->id_user,
             'id_paket'=> $pemesanan->id_paket,
             'id_pemesanan'=> $pemesanan->id_pemesanan,
             'kode_tiket'=>$tiket,
             'qr'=>$qr,
-            'status_tiket_wisata'=>'Available'
+            'status_tiket_wisata'=>'Available',
+            'jenis_tiket'=>$jenis
         ];
         $this->tiket_wisata->addData($data);
     }
