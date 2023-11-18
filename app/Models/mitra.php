@@ -18,6 +18,10 @@ class mitra extends Model
     {
         return DB::table('mitras')->join('users', 'users.id', '=', 'mitras.id_user')->where('id_mitra', $id)->first();
     }
+    public function detailMitra($id)
+    {
+        return DB::table('mitras')->where('id_user', $id)->first();
+    }
     public function addData($data)
     {
         DB::table('mitras')->insert($data);

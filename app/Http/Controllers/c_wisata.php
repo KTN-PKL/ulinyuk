@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\wisata;
+use App\Models\mitra;
 use App\Http\Controllers\c_encrypt;
 use App\Http\Controllers\c_paket;
 use App\Http\Controllers\c_fasilitas_wisata;
@@ -16,6 +17,7 @@ class c_wisata extends Controller
     public function __construct(c_encrypt $encrypt, c_fasilitas_wisata $fasilitas_wisata, c_foto_wisata $foto_wisata, c_jam_buka $jam_buka, c_paket $paket)
     {
         $this->wisata = new wisata();
+        $this->mitra = new mitra();
         $this->encrypt = $encrypt;
         $this->fasilitas_wisata = $fasilitas_wisata;
         $this->foto_wisata = $foto_wisata;
@@ -37,7 +39,8 @@ class c_wisata extends Controller
         } else {
             $did = Auth::user()->id; 
         }
-        $wisata = $this->wisata->mitraData($id);
+        $mitra = $this->mitra->detailMitra($id);
+        $wisata = $this->wisata->mitraData($mitra->id_mitra);
         $data = ['wisata' => $this->id($wisata)];
         return $this->encrypt->encode($data);
     }
