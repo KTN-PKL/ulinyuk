@@ -12,7 +12,7 @@ class foto_wisata extends Model
 
     public function allData($id)
     {
-        return DB::table('foto_wisatas')->where('id_wisata', $id)->get();
+        return DB::table('foto_wisatas')->select('foto_wisata')->where('id_wisata', $id)->get();
     }
     public function count($id)
     {

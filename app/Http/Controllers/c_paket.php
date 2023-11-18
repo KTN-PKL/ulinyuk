@@ -7,15 +7,17 @@ use App\Models\paket;
 use App\Http\Controllers\c_encrypt;
 use App\Http\Controllers\c_paket_opsi;
 use App\Http\Controllers\c_potongan_masif;
+use App\Http\Controllers\c_wisata;
 
 
 class c_paket extends Controller
 {
-    public function __construct(c_encrypt $encrypt, c_paket_opsi $paket_opsi, c_potongan_masif $potongan_masif)
+    public function __construct(c_encrypt $encrypt, c_paket_opsi $paket_opsi, c_potongan_masif $potongan_masif, c_wisata $wisata)
     {
         $this->paket = new paket();
         $this->encrypt = $encrypt;
         $this->paket_opsi = $paket_opsi; 
+        $this->wisata = $wisata; 
         $this->potongan_masif = $potongan_masif; 
     }
 
@@ -36,6 +38,16 @@ class c_paket extends Controller
         $data = ['paket' => $this->id($paket)];
         return $this->encrypt->encode($data);
     }
+    public function allWisata($id)
+    {
+        $did = decrypt($id);
+        $paket = $this->paket->allData($did);
+        foreach ($paket as $item) {
+            $item->paket_opsi = $this->paket_opsi->allData($did);
+        }
+        $data = ['paket' => $this->id($paket)];
+        return $data;
+    }
 
     public function store(Request $request)
     {
@@ -55,6 +67,7 @@ class c_paket extends Controller
             'harga_wend'=> $request->harga_wend,
             'harga_wday'=> $request->harga_wday,];
         $this->paket->addData($data);
+        $this->wisata->copleteData($id);
         $id_paket = $this->paket->id($id);
         $this->paket_opsi->addData($request->mulai_dari, $request->hingga_sampai, $request->harga_opsi, $id_paket->id_paket);
         $this->potongan_masif->addData($request->potongan, $request->jumlah_dari, $request->jumlah_sampai, $id_paket->id_paket);

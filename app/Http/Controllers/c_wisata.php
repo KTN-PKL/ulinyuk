@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\wisata;
 use App\Http\Controllers\c_encrypt;
+use App\Http\Controllers\c_paket;
 use App\Http\Controllers\c_fasilitas_wisata;
 use App\Http\Controllers\c_foto_wisata;
 use App\Http\Controllers\c_jam_buka;
@@ -12,12 +13,13 @@ use Auth;
 
 class c_wisata extends Controller
 {
-    public function __construct(c_encrypt $encrypt, c_fasilitas_wisata $fasilitas_wisata, c_foto_wisata $foto_wisata, c_jam_buka $jam_buka)
+    public function __construct(c_encrypt $encrypt, c_fasilitas_wisata $fasilitas_wisata, c_foto_wisata $foto_wisata, c_jam_buka $jam_buka, c_paket $paket)
     {
         $this->wisata = new wisata();
         $this->encrypt = $encrypt;
         $this->fasilitas_wisata = $fasilitas_wisata;
         $this->foto_wisata = $foto_wisata;
+        $this->paket = $paket;
         $this->jam_buka = $jam_buka;
     }
 
@@ -70,8 +72,8 @@ class c_wisata extends Controller
         $foto_wisata = $this->foto_wisata->allData($did);
         $data = ['wisata' => $wisata,
                  'jam_buka' => $jam_buka,
-                 'fasilitas' => $this->id($fasilitas_wisata),
-                 'foto'=> $this->id($foto_wisata)];
+                 'fasilitas' => $fasilitas_wisata,
+                 'foto'=> $foto_wisata];
         return $this->encrypt->encode($data);
     }
     public function put(Request $request, $id)
@@ -90,6 +92,11 @@ class c_wisata extends Controller
         $this->jam_buka->editData($did, $request->buka, $request->tutup);
         return response(['message' => 'Wisata Berhasil Diubah'], 201);
     }
+    public function completeData($id)
+    {
+        $data = ['status_wisata'=>'complete'];
+        $this->wisata->editData($id, $data);
+    }
     public function delete($id)
     {
         $did = decrypt($id);
@@ -104,5 +111,20 @@ class c_wisata extends Controller
         }
         $data=['wisata' => $this->id($wisata)];
         return $data;
+    }
+    public function detailDataU($id)
+    {
+        $did = decrypt($id);
+        $wisata = $this->wisata->detailData($did);
+        $wisata->id_wisata =  encrypt($wisata->id_wisata);
+        $jam_buka= $this->jam_buka->allData($did);
+        $fasilitas_wisata= $this->fasilitas_wisata->allData($did);
+        $foto_wisata = $this->foto_wisata->allData($did);
+        $data = ['wisata' => $wisata,
+                 'jam_buka' => $jam_buka,
+                 'fasilitas' => $fasilitas_wisata,
+                 'foto'=> $foto_wisata,
+                 'paket'=> $this->paket->allWisata($id)];
+        return $this->encrypt->encode($data);
     }
 }
