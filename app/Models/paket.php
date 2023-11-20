@@ -26,6 +26,10 @@ class paket extends Model
     {
         return DB::table('pakets')->select('id_paket', 'paket', 'fitur', 'harga_wday', 'harga_wend')->where('id_paket', $id)->first();
     }
+    public function detailDataC($id)
+    {
+        return DB::table('pakets')->where('id_paket', $id)->first();
+    }
     public function addData($data)
     {
         DB::table('pakets')->insert($data);

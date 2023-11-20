@@ -19,7 +19,7 @@ class tiket_wisata extends Model
     {
         return DB::table('tiket_wisatas')->get();
     }
-    public function detailData($id)
+    public function detailDataC($id)
     {
         return DB::table('tiket_wisatas')->where('id_tiket_wisata', $id)->first();
     }

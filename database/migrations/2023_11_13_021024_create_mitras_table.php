@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('jenis');
             $table->string('rekening');
             $table->text('deskripsi_mitra');
+            $table->string('balance')->default('0');
             $table->timestamps();
         });
     }
