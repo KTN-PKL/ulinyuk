@@ -21,6 +21,7 @@ class c_mitra extends Controller
     public function id($data){
         foreach ($data as $item) {
             $item->id_mitra = encrypt($item->id_mitra);
+            $item->id = encrypt($item->id);
         }
         return $data;
     }

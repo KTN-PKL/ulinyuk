@@ -39,7 +39,7 @@ class c_wisata extends Controller
         } else {
             $did = Auth::user()->id; 
         }
-        $mitra = $this->mitra->detailMitra($id);
+        $mitra = $this->mitra->detailMitra($did);
         $wisata = $this->wisata->mitraData($mitra->id_mitra);
         $data = ['wisata' => $this->id($wisata)];
         return $this->encrypt->encode($data);
