@@ -24,6 +24,8 @@ class User extends Authenticatable
         'password',
         'kontak',
         'status',
+        'otp',
+        'waktu_otp'
     ];
 
     /**

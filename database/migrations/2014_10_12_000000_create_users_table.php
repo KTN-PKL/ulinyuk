@@ -20,6 +20,8 @@ return new class extends Migration
             $table->string('role');
             $table->string('foto')->default('default.png');
             $table->string('status');
+            $table->string('otp')->nullable();
+            $table->string('waktu_otp')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

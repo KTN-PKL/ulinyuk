@@ -37,6 +37,8 @@ Route::controller(AuthController::class)->group(function () {
     Route::get('auth/unauth', 'unauth')->name('auth.unauth');
 	Route::post('auth/register', 'register')->name('auth.register');
     Route::post('auth/logout', 'logout')->name('auth.logout')->middleware('auth:sanctum');
+    Route::post('auth/otp', 'sendOtp')->name('auth.otp');
+    Route::post('auth/validasi', 'validasiOtp')->name('auth.validasi');
 });
 
 Route::controller(c_kategori::class)->middleware('auth:sanctum')->group(function () {
