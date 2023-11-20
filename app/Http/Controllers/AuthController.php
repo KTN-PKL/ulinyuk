@@ -67,6 +67,7 @@ class AuthController extends Controller
         echo $response;
     }
 
+
     public function validasiOtp(Request $request)
     {
         $now = Carbon::now()->format('dmYHis');
@@ -90,6 +91,44 @@ class AuthController extends Controller
         }else{
             return response(['message' => 'Kode OTP Kadaluwarsa'], 201);
         };
+    }
+
+    public function reOtp(Request $request)
+    {
+        $this->user = new m_user();
+        $getId = $this->user->id($request->kontak);
+        $now = Carbon::now()->format('dmYHis');
+        $otp = rand(100000, 999999);
+        $data = [
+            'otp' => $otp,
+            'waktu_otp' => $now,
+        ];
+        $this->user->editData($getId->id, $data);
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+        CURLOPT_URL => 'https://api.fonnte.com/send',
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_ENCODING => '',
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_TIMEOUT => 0,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST => 'POST',
+        CURLOPT_POSTFIELDS => array(
+        'target' => $request->kontak,
+        'message' => "Hallo Sobat Ulinyuk! Berikut adalah OTP anda: $otp", 
+        'countryCode' => '62',
+        ),
+        CURLOPT_HTTPHEADER => array(
+            'Authorization: AzG5xFMfjb75KdEUkv3L'
+        ),
+        ));
+
+        $response = curl_exec($curl);
+
+        curl_close($curl);
+        return response(['message' => 'Kode OTP Berhasil Dikirim Ulang'], 201);
     }
 
     public function login(Request $request)

@@ -39,6 +39,7 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('auth/logout', 'logout')->name('auth.logout')->middleware('auth:sanctum');
     Route::post('auth/otp', 'sendOtp')->name('auth.otp');
     Route::post('auth/validasi', 'validasiOtp')->name('auth.validasi');
+    Route::post('auth/reotp', 'reOtp')->name('auth.reotp');
 });
 
 Route::controller(c_kategori::class)->middleware('auth:sanctum')->group(function () {
