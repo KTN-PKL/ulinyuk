@@ -11,6 +11,7 @@ use App\Http\Controllers\c_mitra;
 use App\Http\Controllers\c_wisata;
 use App\Http\Controllers\c_paket;
 use App\Http\Controllers\c_pemesanan;
+use App\Http\Controllers\c_tiket;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,7 +29,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::controller(c_pemesanan::class)->group(function () {
-    // Route::post('payment/invoice', 'create')->name('payment.invoice');
 	Route::post('payment/bayar', 'bayar')->name('payment.bayar');
 });
 
@@ -84,7 +84,7 @@ Route::controller(c_berita_informasi::class)->middleware('auth:sanctum')->group(
 Route::controller(c_wisata::class)->middleware('auth:sanctum')->group(function () {
     Route::post('admin/wisata', 'store')->middleware('role:admin');
     Route::get('admin/wisata/{id}', 'show')->middleware('role:admin');
-    Route::get('admin/allData/wisata/{id}', 'get')->middleware('role:admin');
+    Route::get('admin/wisata', 'get')->middleware('role:admin');
 	Route::post('admin/wisata/{id}', 'put')->middleware('role:admin');
     Route::put('admin/aktif/wisata/{id}', 'aktif')->middleware('role:admin');
     Route::put('admin/nonaktif/wisata/{id}', 'nonaktif')->middleware('role:admin');
@@ -105,6 +105,9 @@ Route::controller(c_paket::class)->middleware('auth:sanctum')->group(function ()
 });
 Route::controller(c_pemesanan::class)->middleware('auth:sanctum')->group(function () {
     Route::post('pemesanan', 'create');
+});
+Route::controller(c_tiket::class)->middleware('auth:sanctum')->group(function () {
+    Route::get('tiket', 'get');
 });
 
 

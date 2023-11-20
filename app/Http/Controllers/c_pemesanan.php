@@ -110,12 +110,13 @@ class c_pemesanan extends Controller
         $d = date('d-m-y');
         $h = date('H-i-s');
         $invoice = $this->invoice->getInvoiceById($request['id']);
+        
         $id = $invoice['external_id'];
         $status = ucwords($invoice['status']);
         $data = ['status'=>$status];
         $this->pemesanan->editData($id, $data);
         $pemesanan = $this->pemesanan->detailData($id);
-        $j = count($pemesanan->id_user, $pemesanan->id_paket);
+        $j = $this->tiket_wisata->count($pemesanan->id_user, $pemesanan->id_paket);
         $j = $j + 1;
         $tiket = 'ETW-'.$pemesanan->id_user.'-'.$pemesanan->id_paket.'-'.$j;
         $qr = $this->createQrCode($tiket);

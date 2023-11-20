@@ -32,15 +32,14 @@ class c_wisata extends Controller
         return $data;
     }
    
-    public function get($id)
+    public function get(Request $request)
     {
-        if ($id <> null) {
-            $did = decrypt($id);
+        if ($request->id <> null) {
+            $did = decrypt($request->id);
         } else {
             $did = Auth::user()->id; 
         }
-        $mitra = $this->mitra->detailMitra($did);
-        $wisata = $this->wisata->mitraData($mitra->id_mitra);
+        $wisata = $this->wisata->mitraData($did);
         $data = ['wisata' => $this->id($wisata)];
         return $this->encrypt->encode($data);
     }

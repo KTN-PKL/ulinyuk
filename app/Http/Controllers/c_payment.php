@@ -62,7 +62,7 @@ class c_payment extends Controller
     public function bayar(Request $request)
     {
         $invoice = $this->invoice->getInvoiceById($request['id']);
-
+        return $invoice;
 
         $id = $invoice['external_id'];
         $status = ucwords($invoice['status']);

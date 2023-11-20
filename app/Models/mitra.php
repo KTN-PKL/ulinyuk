@@ -12,7 +12,7 @@ class mitra extends Model
 
     public function allData()
     {
-        return DB::table('mitras')->select('id_mitra, id, name, email, kontak, role, foto, status, pj, nama_rekening, bank, jenis, rekening')->join('users', 'users.id', '=', 'mitras.id_user')->get();
+        return DB::table('mitras')->select('id_mitra', 'id', 'name', 'email', 'kontak', 'role', 'foto', 'status', 'pj', 'nama_rekening', 'bank', 'jenis', 'rekening')->join('users', 'users.id', '=', 'mitras.id_user')->get();
     }
     public function detailData($id)
     {

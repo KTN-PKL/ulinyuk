@@ -25,7 +25,6 @@ class c_kategori extends Controller
     public function get()
     {
         $kategori = $this->kategori->allData();
-        // return $kategori;
         $data = ['kategori' => $this->id($kategori)];
         return $this->encrypt->encode($data);
     }
