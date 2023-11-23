@@ -41,7 +41,7 @@ class c_pemesanan extends Controller
         $potongan = $this->potongan_masif->cekpotongan($request->id_paket, $request->jumlah);
         $deskripsi = "Pemesanan Tiket Wisata ".$paket->wisata.", paket ".$paket->paket;
         $item = "Tiket Wisata ".$paket->wisata.", paket ".$paket->paket;
-        if ($opsi == null) {
+        if ($opsi <> null) {
             $harga = $opsi->harga_opsi;
         } else {
             if ($day == "Sat" || $day == "Mon") {

@@ -46,20 +46,24 @@ class c_tiket extends Controller
     }
     public function chekin($id)
     {
+        date_default_timezone_set("Asia/Jakarta");
+        $d = date("Y-m-d");
         $did = decrypt($id);
         $tiket = $this->tiket_wisata->detailDataC($did);
+        $pemesanan=$this->pemesanan->detailDataC($tiket->id_pemesanan);
+        if ($tiket->status_tiket_wisata == 'Available' && $pemesanan->tanggal == $d) {
         $data = ['status_tiket_wisata'=>'Check-in'];
         $this->tiket_wisata->editData($did, $data);
         $paket=$this->paket->detailDataC($tiket->id_paket);
-        $pemesanan=$this->pemesanan->detailDataC($tiket->id_pemesanan);
-        $wisata=$this->wisata->detailDataC($paket->id_wisata);
-        $mitra=$this->mitra->detailData($wisata->id_mitra);
-        $paket = $this->paket->detailData($request->id_paket);
-        $opsi = $this->paket_opsi->cekharga($request->id_paket, $request->tanggal);
-        $potongan = $this->potongan_masif->cekpotongan($request->id_paket, $request->jumlah);
-        if ($opsi == null) {
+        $wisata=$this->wisata->detailData($paket->id_wisata);
+        $mitra=$this->mitra->detailDataC($wisata->id_mitra);
+        $paket = $this->paket->detailData($tiket->id_paket);
+        $opsi = $this->paket_opsi->cekharga($tiket->id_paket, $pemesanan->tanggal);
+        $potongan = $this->potongan_masif->cekpotongan($tiket->id_paket, $pemesanan->jumlah);
+        if ($opsi <> null) {
             $harga = $opsi->harga_opsi;
         } else {
+            $day = date('D', strtotime($pemesanan->tanggal));
             if ($day == "Sat" || $day == "Mon") {
                 $harga = $paket->harga_wend;
             } else {
@@ -71,11 +75,14 @@ class c_tiket extends Controller
         } else {
             $potongan = 0;
         }
-        $balanceplus = ($harga-($harga*($potongan/100)))*$request->jumlah;
+        $balanceplus = ($harga-($harga*($potongan/100)))*$pemesanan->jumlah;
         $balance = $mitra->balance + $balanceplus;
         $data = ['balance'=>$balance];
         $this->mitra->editData($mitra->id_mitra, $data);
         return response(['message' => 'Berhasil Check-in'], 201);
+        } else {
+        return response(['message' => 'Anda Tidak Bisa Check-in'], 201);
+        }
     }
     public function reschedule(Request $request, $id)
     {
