@@ -120,7 +120,7 @@ Route::controller(c_tiket::class)->middleware('auth:sanctum')->group(function ()
 Route::controller(c_refund::class)->middleware('auth:sanctum')->group(function () {
     Route::get('admin/refund', 'get')->middleware('role:admin');
     Route::get('admin/refund/{id}', 'show')->middleware('role:admin');
-    Route::put('refund/{id}', 'chekin');
+    Route::post('admin/refund/{id}', 'refund')->middleware('role:admin');
     Route::post('refund/{id}', 'createwisata');
 });
 
