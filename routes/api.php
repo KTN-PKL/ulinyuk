@@ -12,6 +12,7 @@ use App\Http\Controllers\c_wisata;
 use App\Http\Controllers\c_paket;
 use App\Http\Controllers\c_pemesanan;
 use App\Http\Controllers\c_tiket;
+use App\Http\Controllers\c_refund;
 
 /*
 |--------------------------------------------------------------------------
@@ -114,6 +115,13 @@ Route::controller(c_tiket::class)->middleware('auth:sanctum')->group(function ()
     Route::get('tiket/{id}', 'show');
     Route::put('tiket/{id}', 'chekin');
     Route::post('tiket/{id}', 'reschedule');
+});
+
+Route::controller(c_refund::class)->middleware('auth:sanctum')->group(function () {
+    Route::get('admin/refund', 'get')->middleware('role:admin');
+    Route::get('admin/refund/{id}', 'show')->middleware('role:admin');
+    Route::put('refund/{id}', 'chekin');
+    Route::post('refund/{id}', 'createwisata');
 });
 
 

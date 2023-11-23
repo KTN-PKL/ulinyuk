@@ -15,6 +15,12 @@ return new class extends Migration
             $table->id('id_request_refund');
             $table->bigInteger('id_tiket');
             $table->string('jenis_tiket');
+            $table->string('nama_pemilik_rekening');
+            $table->string('bank_tujuan');
+            $table->string('no_rekening_tujuan');
+            $table->string('whatsapp');
+            $table->string('alasan');
+            $table->string('bukti_refund')->nullable();
             $table->timestamps();
         });
     }
