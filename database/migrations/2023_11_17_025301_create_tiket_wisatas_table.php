@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('status_tiket_wisata');
             $table->string('qr');
             $table->string('jenis_tiket');
+            $table->string('was_reschedule')->default('0');
             $table->timestamps();
         });
     }

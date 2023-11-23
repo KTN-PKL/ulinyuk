@@ -18,6 +18,10 @@ class pemesanan extends Model
     {
         return DB::table('pemesanans')->where('external_id', $id)->first();
     }
+    public function detailDataC($id)
+    {
+        return DB::table('pemesanans')->where('id_pemesanan', $id)->first();
+    }
     public function addData($data)
     {
         DB::table('pemesanans')->insert($data);
@@ -25,6 +29,10 @@ class pemesanan extends Model
     public function editData($id, $data)
     {
         DB::table('pemesanans')->where('external_id', $id)->update($data);
+    }
+    public function editData2($id, $data)
+    {
+        DB::table('pemesanans')->where('id_pemesanan', $id)->update($data);
     }
     public function deleteData($id)
     {
