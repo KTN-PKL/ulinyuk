@@ -112,4 +112,19 @@ class c_refund extends Controller
                  'total'=>$total];
         return $this->encrypt->encode($data);
     }
+    public function refund(Request $request, $id)
+    {
+        $did = decrypt($id);
+        $refund = $this->refund->detailData($did);
+        if ($refund->jenis_tiket == 'wisata') {
+            $data = ['status_tiket_wisata' => 'Refund'];
+            $this->tiket->editData($did, $data);
+        }
+        $file  = $request->bukti;
+        $filename = 'bukti_refund_'.$did.'.'.$file->extension();
+        $file->move(public_path('bukti_refund'),$filename);
+        $data = ['bukti_refund' => $filename];
+        $this->refund->editData($did, $data);
+        return response(['message' => 'Refund Berhasil'], 201);
+    }
 }
