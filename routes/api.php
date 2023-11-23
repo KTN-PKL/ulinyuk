@@ -112,7 +112,7 @@ Route::controller(c_pemesanan::class)->middleware('auth:sanctum')->group(functio
 Route::controller(c_tiket::class)->middleware('auth:sanctum')->group(function () {
     Route::get('tiket', 'get');
     Route::get('tiket/{id}', 'show');
-    Route::put('tiket/{id}', 'checkin');
+    Route::put('tiket/{id}', 'chekin');
     Route::post('tiket/{id}', 'reschedule');
 });
 

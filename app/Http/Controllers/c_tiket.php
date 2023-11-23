@@ -90,6 +90,11 @@ class c_tiket extends Controller
             $hasil = $hasil - $hari;
             $nulan = $bulan + 1;
         }
+        if ($bulan > 12)
+        {
+            $tahun = $tahun + 1;
+            $bulan = $bulan - 12;
+        }
         $jb = strlen($bulan);
         $jh = strlen($hasil);
         if ($jb == 1) {
@@ -102,11 +107,11 @@ class c_tiket extends Controller
         $did = decrypt($id);
         $tiket = $this->tiket_wisata->detailDataC($did);
         $pemesanan=$this->pemesanan->detailDataC($tiket->id_pemesanan);
-        if ($tiket_wisata->status_tiket_wisata == 'Available' && $pemesanan->$tanggal < $d && $tiket->was_reschedule == '0') {
+        if ($tiket->status_tiket_wisata == 'Available' && $pemesanan->tanggal > $d && $tiket->was_reschedule == '0') {
             $data = ['tanggal' => $request->tanggal];
             $this->pemesanan->editData2($tiket->id_pemesanan, $data);
             $data = ['was_reschedule' => '1'];
-            $this->pemesanan->editData($did, $data);
+            $this->tiket_wisata->editData($did, $data);
             return response(['message' => 'Berhasil Reschedule'], 201);
         } else {
             return response(['message' => 'Anda Tidak Bisa Melakukan Reschedule'], 201);
