@@ -13,6 +13,7 @@ use App\Http\Controllers\c_paket;
 use App\Http\Controllers\c_pemesanan;
 use App\Http\Controllers\c_tiket;
 use App\Http\Controllers\c_refund;
+use App\Http\Controllers\c_pencairan;
 
 /*
 |--------------------------------------------------------------------------
@@ -121,7 +122,16 @@ Route::controller(c_refund::class)->middleware('auth:sanctum')->group(function (
     Route::get('admin/refund', 'get')->middleware('role:admin');
     Route::get('admin/refund/{id}', 'show')->middleware('role:admin');
     Route::post('admin/refund/{id}', 'refund')->middleware('role:admin');
+    Route::put('admin/refund/{id}', 'acept_refund')->middleware('role:admin');
     Route::post('refund/{id}', 'createwisata');
 });
-
+Route::controller(c_pencairan::class)->middleware('auth:sanctum')->group(function () {
+    Route::get('admin/pencairan', 'getAdmin')->middleware('role:admin');
+    Route::get('admin/pencairan/{id}', 'show')->middleware('role:admin');
+    Route::post('admin/pencairan/{id}', 'bukti_pencairan')->middleware('role:admin');
+    Route::put('admin/pencairan/{id}', 'terima_pencairan')->middleware('role:admin');
+    Route::get('mitra/pencairan', 'getMitra')->middleware('role:mitra');
+    Route::post('mitra/pencairan/{id}', 'creat')->middleware('role:mitra');
+    Route::get('mitra/pencairan/{id}', 'show')->middleware('role:mitra');
+});
 

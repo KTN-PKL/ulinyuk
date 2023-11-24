@@ -112,6 +112,16 @@ class c_refund extends Controller
                  'total'=>$total];
         return $this->encrypt->encode($data);
     }
+    public function acept_refund($id)
+    {
+        $did = decrypt($id);
+        $refund = $this->refund->detailData($did);
+        if ($refund->jenis_tiket == 'wisata') {
+            $data = ['status_tiket_wisata' => 'Prosses Refund'];
+            $this->tiket->editData($did, $data);
+        }
+        return response(['message' => 'Refund Sedang Diproses'], 201);
+    }
     public function refund(Request $request, $id)
     {
         $did = decrypt($id);
