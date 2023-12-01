@@ -15,6 +15,11 @@ class c_foto_wisata extends Controller
     {
         return $this->foto->allData($id);
     }
+
+    public function DetailData($id)
+    {
+        return $this->foto->detailData($id);
+    }
     public function addData($id, $foto)
     {
         $count = $this->foto->count($id);

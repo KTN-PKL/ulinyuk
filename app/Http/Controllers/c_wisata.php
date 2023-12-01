@@ -112,7 +112,7 @@ class c_wisata extends Controller
             $item->foto = $this->foto_wisata->detailData($item->id_wisata);
         }
         $data=['wisata' => $this->id($wisata)];
-        return $data;
+        return $this->encrypt->encode($data);
     }
     public function detailDataU($id)
     {

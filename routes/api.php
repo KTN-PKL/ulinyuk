@@ -87,6 +87,7 @@ Route::controller(c_berita_informasi::class)->middleware('auth:sanctum')->group(
     Route::delete('admin/berita_informasi/{id}', 'delete')->middleware('role:admin');
 });
 Route::controller(c_wisata::class)->middleware('auth:sanctum')->group(function () {
+//Admin
     Route::post('admin/wisata', 'store')->middleware('role:admin');
     Route::get('admin/wisata/{id}', 'show')->middleware('role:admin');
     Route::get('admin/wisata', 'get')->middleware('role:admin');
@@ -94,19 +95,31 @@ Route::controller(c_wisata::class)->middleware('auth:sanctum')->group(function (
     Route::put('admin/aktif/wisata/{id}', 'aktif')->middleware('role:admin');
     Route::put('admin/nonaktif/wisata/{id}', 'nonaktif')->middleware('role:admin');
     Route::delete('admin/wisata/{id}', 'delete')->middleware('role:admin');
-    Route::get('wisata/{id}', 'show');
-    Route::get('wisata', 'get');
+
+//mitra
+    Route::post('mitra/wisata', 'store')->middleware('role:mitra');
+    Route::get('mitra/wisata/{id}', 'show')->middleware('role:mitra');
+    Route::get('mitra/wisata', 'get')->middleware('role:mitra');
+	Route::post('mitra/wisata/{id}', 'put')->middleware('role:mitra');
+    Route::put('mitra/aktif/wisata/{id}', 'aktif')->middleware('role:mitra');
+    Route::put('mitra/nonaktif/wisata/{id}', 'nonaktif')->middleware('role:mitra');
+    Route::delete('mitra/wisata/{id}', 'delete')->middleware('role:mitra');
+
+//User Umum
+    Route::get('wisata/{id}', 'detailDataU');
+    Route::get('wisata', 'allDataU');
 });
 Route::controller(c_paket::class)->middleware('auth:sanctum')->group(function () {
     Route::post('admin/paket', 'store')->middleware('role:admin');
-    Route::get('paket/{id}', 'show');
-    Route::get('paket', 'get');
     Route::get('admin/detail/paket/{id}', 'show')->middleware('role:admin');
     Route::get('admin/all/paket/{id}', 'get')->middleware('role:admin');
 	Route::post('admin/paket/{id}', 'put')->middleware('role:admin');
     Route::put('admin/aktif/paket/{id}', 'aktif')->middleware('role:admin');
     Route::put('admin/nonaktif/paket/{id}', 'nonaktif')->middleware('role:admin');
     Route::delete('admin/paket/{id}', 'delete')->middleware('role:admin');
+
+    Route::get('paket/{id}', 'show');
+    Route::get('paket', 'get');
 });
 Route::controller(c_pemesanan::class)->middleware('auth:sanctum')->group(function () {
     Route::post('pemesanan', 'create');
