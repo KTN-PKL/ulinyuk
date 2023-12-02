@@ -14,6 +14,7 @@ use App\Http\Controllers\c_pemesanan;
 use App\Http\Controllers\c_tiket;
 use App\Http\Controllers\c_refund;
 use App\Http\Controllers\c_pencairan;
+use App\Http\Controllers\c_member;
 
 /*
 |--------------------------------------------------------------------------
@@ -125,6 +126,7 @@ Route::controller(c_pemesanan::class)->middleware('auth:sanctum')->group(functio
     Route::post('pemesanan', 'create');
 });
 Route::controller(c_tiket::class)->middleware('auth:sanctum')->group(function () {
+    
     Route::get('tiket', 'get');
     Route::get('tiket/{id}', 'show');
     Route::put('tiket/{id}', 'chekin');
@@ -138,6 +140,11 @@ Route::controller(c_refund::class)->middleware('auth:sanctum')->group(function (
     Route::put('admin/refund/{id}', 'acept_refund')->middleware('role:admin');
     Route::post('refund/{id}', 'createwisata');
 });
+
+Route::controller(c_member::class)->middleware('auth:sanctum')->group(function () {
+    Route::post('admin/member', 'member')->middleware('role:admin');
+});
+
 Route::controller(c_pencairan::class)->middleware('auth:sanctum')->group(function () {
     Route::get('admin/pencairan', 'getAdmin')->middleware('role:admin');
     Route::get('admin/pencairan/{id}', 'show')->middleware('role:admin');
