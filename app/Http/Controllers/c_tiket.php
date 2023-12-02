@@ -10,6 +10,7 @@ use App\Models\wisata;
 use App\Models\mitra;
 use App\Models\paket_opsi;
 use App\Models\potongan_masif;
+use Auth;
 
 class c_tiket extends Controller
 {
@@ -32,7 +33,18 @@ class c_tiket extends Controller
     }
     public function get()
     {
-        $tiket_wisata = $this->tiket_wisata->allData();
+        $tiket_wisata = $this->tiket_wisata->allDataU(Auth::user()->id);
+        $data = ['tiket_wisata' => $this->id($tiket_wisata)];
+        return $this->encrypt->encode($data);
+    }
+    public function getM(Request $request)
+    {
+        if ($request->id <> null) {
+            $did = decrypt($request->id);
+        } else {
+            $did = Auth::user()->id; 
+        }
+        $tiket_wisata = $this->tiket_wisata->allDataM($did);
         $data = ['tiket_wisata' => $this->id($tiket_wisata)];
         return $this->encrypt->encode($data);
     }

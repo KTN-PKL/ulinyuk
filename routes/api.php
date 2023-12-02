@@ -126,10 +126,17 @@ Route::controller(c_pemesanan::class)->middleware('auth:sanctum')->group(functio
     Route::post('pemesanan', 'create');
 });
 Route::controller(c_tiket::class)->middleware('auth:sanctum')->group(function () {
-    
+    Route::get('admin/tiket', 'getM')->middleware('role:admin');
+    Route::get('admin/tiket/{id}', 'show')->middleware('role:admin');
+
+    Route::get('mitra/tiket', 'getM')->middleware('role:mitra');
+    Route::get('mitra/tiket/{id}', 'show')->middleware('role:mitra');
+    Route::put('mitra/tiket/{id}', 'chekin')->middleware('role:mitra');
+
+    Route::put('petugas/tiket/{id}', 'chekin')->middleware('role:petugas');
+
     Route::get('tiket', 'get');
     Route::get('tiket/{id}', 'show');
-    Route::put('tiket/{id}', 'chekin');
     Route::post('tiket/{id}', 'reschedule');
 });
 
